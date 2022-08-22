@@ -6,10 +6,9 @@
   "homepage": "https://github.com/node-formidable/formidable",
   "funding": "https://ko-fi.com/tunnckoCore/commissions",
   "repository": "node-formidable/formidable",
-  "type": "module",
-  "main": "./src/index.js",
+  "main": "dist/index.js",
   "files": [
-    "src"
+    "dist/index.js"
   ],
   "publishConfig": {
     "access": "public",
@@ -17,6 +16,7 @@
   },
   "scripts": {
     "bench": "node benchmark",
+    "build": "rollup -c",
     "fmt": "yarn run fmt:prepare '**/*'",
     "fmt:prepare": "prettier --write",
     "lint": "yarn run lint:prepare .",
@@ -37,6 +37,9 @@
   "devDependencies": {
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "@sindresorhus/slugify": "^2.1.0",
     "@tunnckocore/prettier-config": "1.3.8",
     "del-cli": "3.0.0",
@@ -55,11 +58,22 @@
     "nyc": "15.1.0",
     "prettier": "2.0.5",
     "prettier-plugin-pkgjson": "0.2.8",
+    "rollup": "^2.78.1",
     "supertest": "6.1.6"
   },
   "jest": {
     "verbose": true
   },
+  "keywords": [
+    "multipart",
+    "form",
+    "data",
+    "querystring",
+    "www",
+    "json",
+    "ulpoad",
+    "file"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "git status --porcelain && yarn lint-staged",
@@ -79,21 +93,11 @@
       "yarn run lint"
     ]
   },
+  "packageManager": "yarn@1.22.17",
   "renovate": {
     "extends": [
       "@tunnckocore",
       ":pinAllExceptPeerDependencies"
     ]
-  },
-  "packageManager": "yarn@1.22.17",
-  "keywords": [
-    "multipart",
-    "form",
-    "data",
-    "querystring",
-    "www",
-    "json",
-    "ulpoad",
-    "file"
-  ]
+  }
 }

@@ -6,6 +6,9 @@
 
 > A Node.js module for parsing form data, especially file uploads.
 
+> This is a cjs version of the formidable. This has not been published. Use the
+> git url to use this package.
+
 [![Code style][codestyle-img]][codestyle-url]
 [![codecoverage][codecov-img]][codecov-url]
 [![linux build status][linux-build-img]][build-url]
@@ -15,8 +18,8 @@
 If you have any _how-to_ kind of questions, please read the [Contributing
 Guide][contributing-url] and [Code of Conduct][code_of_conduct-url]
 documents.<br /> For bugs reports and feature requests, [please create an
-issue][open-issue-url] or ping [@tunnckoCore / @3a1FcBx0](https://twitter.com/3a1FcBx0)
-at Twitter.
+issue][open-issue-url] or ping
+[@tunnckoCore / @3a1FcBx0](https://twitter.com/3a1FcBx0) at Twitter.
 
 [![Conventional Commits][ccommits-img]][ccommits-url]
 [![Minimum Required Nodejs][nodejs-img]][npmv-url]
@@ -41,7 +44,9 @@ use._
 
 ## Project Status: Maintained
 
-_Check [VERSION NOTES](https://github.com/node-formidable/formidable/blob/master/VERSION_NOTES.md) for more information on v1, v2, and v3 plans, NPM dist-tags and branches._
+_Check
+[VERSION NOTES](https://github.com/node-formidable/formidable/blob/master/VERSION_NOTES.md)
+for more information on v1, v2, and v3 plans, NPM dist-tags and branches._
 
 This module was initially developed by
 [**@felixge**](https://github.com/felixge) for
@@ -73,7 +78,9 @@ This project requires `Node.js >= 10.13`. Install it using
 recommend to use Yarn when you think to contribute to this project._
 
 This is a low-level package, and if you're using a high-level framework it _may_
-already be included. Check the examples below and the [examples/](https://github.com/node-formidable/formidable/tree/master/examples) folder.
+already be included. Check the examples below and the
+[examples/](https://github.com/node-formidable/formidable/tree/master/examples)
+folder.
 
 ```
 # v2
@@ -84,8 +91,9 @@ npm install formidable@v2
 npm install formidable@v3
 ```
 
-_**Note:** In the near future v3 will be published on the `latest` NPM dist-tag. Future not ready releases will be published on `*-next` dist-tags for the corresponding version._
-
+_**Note:** In the near future v3 will be published on the `latest` NPM dist-tag.
+Future not ready releases will be published on `*-next` dist-tags for the
+corresponding version._
 
 ## Examples
 
@@ -310,18 +318,19 @@ See it's defaults in [src/Formidable.js DEFAULT_OPTIONS](./src/Formidable.js)
   files
 - `options.minFileSize` **{number}** - default `1` (1byte); the minium size of
   uploaded file.
-- `options.maxFiles` **{number}** - default `Infinity`;
-  limit the amount of uploaded files, set Infinity for unlimited
+- `options.maxFiles` **{number}** - default `Infinity`; limit the amount of
+  uploaded files, set Infinity for unlimited
 - `options.maxFileSize` **{number}** - default `200 * 1024 * 1024` (200mb);
   limit the size of each uploaded file.
-- `options.maxTotalFileSize` **{number}** - default `options.maxFileSize`;
-  limit the size of the batch of uploaded files.
-- `options.maxFields` **{number}** - default `1000`; limit the number of fields, set Infinity for unlimited
+- `options.maxTotalFileSize` **{number}** - default `options.maxFileSize`; limit
+  the size of the batch of uploaded files.
+- `options.maxFields` **{number}** - default `1000`; limit the number of fields,
+  set Infinity for unlimited
 - `options.maxFieldsSize` **{number}** - default `20 * 1024 * 1024` (20mb);
   limit the amount of memory all fields together (except files) can allocate in
   bytes.
-- `options.hashAlgorithm` **{string | false}** - default `false`; include checksums calculated
-  for incoming files, set this to some hash algorithm, see
+- `options.hashAlgorithm` **{string | false}** - default `false`; include
+  checksums calculated for incoming files, set this to some hash algorithm, see
   [crypto.createHash](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options)
   for available algorithms
 - `options.fileWriteStreamHandler` **{function}** - default `null`, which by
@@ -340,13 +349,12 @@ See it's defaults in [src/Formidable.js DEFAULT_OPTIONS](./src/Formidable.js)
 - `options.filter` **{function}** - default function that always returns true.
   Use it to filter files before they are uploaded. Must return a boolean.
 
-
-#### `options.filename`  **{function}** function (name, ext, part, form) -> string
+#### `options.filename` **{function}** function (name, ext, part, form) -> string
 
 where part can be decomposed as
 
 ```js
-const { originalFilename, mimetype} = part;
+const { originalFilename, mimetype } = part;
 ```
 
 _**Note:** If this size of combined fields, or size of some file is exceeded, an
@@ -362,19 +370,18 @@ form.bytesReceived;
 form.bytesExpected;
 ```
 
-#### `options.filter`  **{function}** function ({name, originalFilename, mimetype}) -> boolean
+#### `options.filter` **{function}** function ({name, originalFilename, mimetype}) -> boolean
 
-**Note:** use an outside variable to cancel all uploads upon the first error 
+**Note:** use an outside variable to cancel all uploads upon the first error
 
 ```js
 const options = {
-  filter: function ({name, originalFilename, mimetype}) {
+  filter: function ({ name, originalFilename, mimetype }) {
     // keep only images
-    return mimetype && mimetype.includes("image");
-  }
+    return mimetype && mimetype.includes('image');
+  },
 };
 ```
-
 
 ### .parse(request, callback)
 
@@ -395,40 +402,40 @@ multipart stream. Doing so will disable any `'field'` / `'file'` events
 processing which would occur otherwise, making you fully responsible for
 handling the processing.
 
-About `uploadDir`, given the following directory structure 
+About `uploadDir`, given the following directory structure
+
 ```
 project-name
 ├── src
 │   └── server.js
-│       
+│
 └── uploads
     └── image.jpg
 ```
 
 `__dirname` would be the same directory as the source file itself (src)
 
-
 ```js
- `${__dirname}/../uploads`
+`${__dirname}/../uploads`;
 ```
 
 to put files in uploads.
 
-Omitting `__dirname` would make the path relative to the current working directory. This would be the same if server.js is launched from src but not project-name.
-
+Omitting `__dirname` would make the path relative to the current working
+directory. This would be the same if server.js is launched from src but not
+project-name.
 
 `null` will use default which is `os.tmpdir()`
 
-Note: If the directory does not exist, the uploaded files are __silently discarded__. To make sure it exists:
+Note: If the directory does not exist, the uploaded files are **silently
+discarded**. To make sure it exists:
 
 ```js
-import {createNecessaryDirectoriesSync} from "filesac";
-
+import { createNecessaryDirectoriesSync } from 'filesac';
 
 const uploadPath = `${__dirname}/../uploads`;
 createNecessaryDirectoriesSync(`${uploadPath}/x`);
 ```
-
 
 In the example below, we listen on couple of events and direct them to the
 `data` listener, so you can do whatever you choose there, based on whether its
@@ -458,30 +465,33 @@ form.once('end', () => {
 });
 
 // If you want to customize whatever you want...
-form.on('data', ({ name, key, value, buffer, start, end, formname, ...more }) => {
-  if (name === 'partBegin') {
-  }
-  if (name === 'partData') {
-  }
-  if (name === 'headerField') {
-  }
-  if (name === 'headerValue') {
-  }
-  if (name === 'headerEnd') {
-  }
-  if (name === 'headersEnd') {
-  }
-  if (name === 'field') {
-    console.log('field name:', key);
-    console.log('field value:', value);
-  }
-  if (name === 'file') {
-    console.log('file:', formname, value);
-  }
-  if (name === 'fileBegin') {
-    console.log('fileBegin:', formname, value);
-  }
-});
+form.on(
+  'data',
+  ({ name, key, value, buffer, start, end, formname, ...more }) => {
+    if (name === 'partBegin') {
+    }
+    if (name === 'partData') {
+    }
+    if (name === 'headerField') {
+    }
+    if (name === 'headerValue') {
+    }
+    if (name === 'headerEnd') {
+    }
+    if (name === 'headersEnd') {
+    }
+    if (name === 'field') {
+      console.log('field name:', key);
+      console.log('field value:', value);
+    }
+    if (name === 'file') {
+      console.log('file:', formname, value);
+    }
+    if (name === 'fileBegin') {
+      console.log('fileBegin:', formname, value);
+    }
+  },
+);
 ```
 
 ### .use(plugin: Plugin)
@@ -529,7 +539,7 @@ which is used in [src/plugins/multipart.js](./src/plugins/multipart.js)), then
 you can remove it from the `options.enabledPlugins`, like so
 
 ```js
-import formidable, {octetstream, querystring, json} from "formidable";
+import formidable, { octetstream, querystring, json } from 'formidable';
 const form = formidable({
   hashAlgorithm: 'sha1',
   enabledPlugins: [octetstream, querystring, json],
@@ -590,7 +600,7 @@ export interface File {
 
   // The name this file had according to the uploading client.
   file.originalFilename: string | null;
-  
+
   // calculated based on options provided
   file.newFilename: string | null;
 
@@ -618,7 +628,9 @@ requests.
 #### `'progress'`
 
 Emitted after each incoming chunk of data that has been parsed. Can be used to
-roll your own progress bar. **Warning** Use this only for server side progress bar. On the client side better use `XMLHttpRequest` with `xhr.upload.onprogress =`
+roll your own progress bar. **Warning** Use this only for server side progress
+bar. On the client side better use `XMLHttpRequest` with
+`xhr.upload.onprogress =`
 
 ```js
 form.on('progress', (bytesReceived, bytesExpected) => {});
@@ -640,12 +652,12 @@ file system.
 
 ```js
 form.on('fileBegin', (formName, file) => {
-    // accessible here 
-    // formName the name in the form (<input name="thisname" type="file">) or http filename for octetstream
-    // file.originalFilename http filename or null if there was a parsing error
-    // file.newFilename generated hexoid or what options.filename returned
-    // file.filepath default pathnme as per options.uploadDir and options.filename
-    // file.filepath = CUSTOM_PATH // to change the final path
+  // accessible here
+  // formName the name in the form (<input name="thisname" type="file">) or http filename for octetstream
+  // file.originalFilename http filename or null if there was a parsing error
+  // file.newFilename generated hexoid or what options.filename returned
+  // file.filepath default pathnme as per options.uploadDir and options.filename
+  // file.filepath = CUSTOM_PATH // to change the final path
 });
 ```
 
@@ -656,9 +668,9 @@ Emitted whenever a field / file pair has been received. `file` is an instance of
 
 ```js
 form.on('file', (formname, file) => {
-    // same as fileBegin, except
-    // it is too late to change file.filepath
-    // file.hash is available if options.hash was used
+  // same as fileBegin, except
+  // it is too late to change file.filepath
+  // file.hash is available if options.hash was used
 });
 ```
 
@@ -694,12 +706,13 @@ finished flushing to disk. This is a great place for you to send your response.
 form.on('end', () => {});
 ```
 
-
 ### Helpers
 
 #### firstValues
 
-Gets first values of fields, like pre 3.0.0 without multiples pass in a list of optional exceptions where arrays of strings is still wanted (`<select multiple>` for example)
+Gets first values of fields, like pre 3.0.0 without multiples pass in a list of
+optional exceptions where arrays of strings is still wanted (`<select multiple>`
+for example)
 
 ```js
 import { firstValues } from 'formidable/src/helpers/firstValues.js';
@@ -716,8 +729,9 @@ form.parse(request, async (error, fieldsMultiple, files) => {
 
 #### readBooleans
 
-Html form input type="checkbox" only send the value "on" if checked,
-convert it to booleans for each input that is expected to be sent as a checkbox, only use after firstValues or similar was called.
+Html form input type="checkbox" only send the value "on" if checked, convert it
+to booleans for each input that is expected to be sent as a checkbox, only use
+after firstValues or similar was called.
 
 ```js
 import { firstValues } from 'formidable/src/helpers/firstValues.js';
@@ -729,7 +743,7 @@ form.parse(request, async (error, fieldsMultiple, files) => {
         //...
     }
     const fieldsSingle = firstValues(form, fieldsMultiple);
-    
+
     const expectedBooleans = ['checkbox1', 'wantsNewsLetter', 'hasACar'];
     const fieldsWithBooleans = readBooleans(fieldsSingle, expectedBooleans);
     // ...
@@ -794,8 +808,10 @@ Thanks goes to these wonderful people
 From a [Felix blog post](https://felixge.de/2013/03/11/the-pull-request-hack/):
 
 - [Sven Lito](https://github.com/svnlto) for fixing bugs and merging patches
-- [egirshov](https://github.com/egirshov) for contributing many improvements to the node-formidable multipart parser
-- [Andrew Kelley](https://github.com/superjoe30) for also helping with fixing bugs and making improvements
+- [egirshov](https://github.com/egirshov) for contributing many improvements to
+  the node-formidable multipart parser
+- [Andrew Kelley](https://github.com/superjoe30) for also helping with fixing
+  bugs and making improvements
 - [Mike Frey](https://github.com/mikefrey) for contributing JSON support
 
 ## License
